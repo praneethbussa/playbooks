@@ -1,0 +1,19 @@
+---
+- name: Update web servers
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Ensure apache is insatalled
+    package:
+      name: httpd
+      state: present
+
+- name: Update app servers
+  hosts: appservers
+  become: yes
+  tasks:
+  - name: Ensure zip is installed
+    package:
+      name: zip
+      state: present
+...
