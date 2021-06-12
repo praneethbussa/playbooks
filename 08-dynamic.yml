@@ -1,0 +1,30 @@
+---
+- name: Update web servers
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Ensure apache is insatalled
+    package:
+      name: httpd
+      state: present
+  - name: Ensure apache is started
+    service:
+      name: httpd
+      state: started
+  - name: Ensure apache is enabled
+    service:
+      name: httpd
+      enabled: yes
+  - name: Ensure git is insatalled
+    package:
+      name: git
+      state: present
+  - name: Ensure site is present
+    git:
+      repo: https://github.com/ravi2krishna/ecomm.git
+      dest: /var/www/html
+  - name: Ensure custom page is updated
+    template:
+      src: dynamic.j2
+      dest: /var/www/html/dynamic.html
+...

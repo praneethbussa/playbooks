@@ -1,0 +1,10 @@
+---
+- name: Update web servers
+  hosts: webservers
+  become: yes
+  tasks:
+  - name: Ensure custom page is updated
+    copy:
+      src: hello.html
+      dest: /opt/hello.html
+...
